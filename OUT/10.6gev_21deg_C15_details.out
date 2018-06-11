@@ -1,0 +1,23 @@
+EXTERNAL/TSAI:  VERSION OF 8/8/96
+
+RUNPLAN for 40deg XEM running                                           
+ from Gaskell!                                                          
+                                                                        
+Carbon 1.6%                                                             
+from ent.m2 using 0.452 g/cm2- revised 2/20/01, and Dunne 8/01          
+
+----*----1----*----2----*----3----*----4----*----5----*----6----*----7--
+                                                                        
+
+TARGET (iZ,iA) = (  6, 12);   avgA =  12.000; amuM= 12.002; avgM= 11.180
+ targ= ordina; ttarg(rl)=0.01228; twall=0.00000; tbeam=0.00000; tspec=0.01046
+         Nseg  =   2
+ MODELS: P elastc(ikk)=14; deut elastic=13; inelastc=206; Pauli Supresion= 1
+ NUCLEAR METHOD= 1;   NUCLEAR_MODEL= 1
+
+    E1    TH    Q2 COS_K         SMR     NUC          INT-SMR
+    EP     X    W2 QE-PK  INELA  Q-ELA  ELAST   TOTAL  MODEL
+
+  0.000 0.000  0.000 .000  0.00  0.00  0.00  0.00  0.00  0.00 0.000
+                           0.00  0.00  0.00  0.00  0.00  0.00 0.000E+00
+
