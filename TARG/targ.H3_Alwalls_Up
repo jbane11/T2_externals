@@ -1,19 +1,19 @@
-Copper ~6%     
-from ent.m2 using 0.452 g/cm2- revised 2/20/01, and Dunne 8/01
+Tritium Cell Al walls Upstream for H3 cell     
+revised 7/06/18
 ----*----1----*----2----*----3----*----4----*----5----*----6----*----7---
                                                                          
-iZ    (#)         29                                                     
-iA    (#)         64                                                     
+iZ    (#)         13                                                     
+iA    (#)         27                                                     
                                                                          
-avgA  (#)         63.6166
+avgA  (#)                                                                
 avgM (GeV)                                                               
                                                                          
-target type          ordinary   : columns 21-27         
+target type         TRITIUM  : columns 21-27         
 thicknesses (rad. lengths):                                              
-   target          0.0621             
-   walls           0.000001                                              
-   pre-target      0.000001                 
-   post-target     0.00761                  
+   target          0.00284            
+   walls           0.00000                                              
+   pre-target      0.00100                
+   post-target     0.00732                  
 nseg (even)        2                                                     
                                                                          
 Pking: Ep/E >      1.0                                                   

@@ -1,0 +1,93 @@
+#!bin/bash
+#set -x
+
+#########
+#This code will check if you have an IMP and Runplan for your current settings. 
+#Then run exteranls on all parts of your target.
+################################
+home=${PWD}
+
+if [ $# -lt 3 ]
+then
+	echo "Please enter the target you would like to use...(He3, H3, D2)"
+	read tgt
+	echo "Please enter run numer this is simulating.."
+	read runnum
+	echo "Please enter the angle you want to look at, or k for kin. number"
+	read angle
+	if [ "${angle}" == "k" ]
+	then
+		echo "Kin :"
+		read kin
+	fi
+	
+else
+	tgt=$1
+	runnum=$2
+	angle=$3
+	if [ "${angle}" == "k" ]
+	then
+		kin=$4
+	fi
+fi
+		
+while IFS=, read kinin Ein Epin thetain
+do
+	if [ "${kinin}" ==  "${kin}" ]
+	then
+		E=$Ein
+		Ep=$Epin
+		theta=$thetain
+		break
+	fi
+done < marathon_kin_table.csv
+
+
+if [ -e RUNPLAN/marathon_${tgt}_kin${kin}.inp ]
+then
+	a=a
+else
+	echo "Making RUNPLAN"
+	cd RUNPLAN	
+	root -b -l -q "gen_Runplan.C(0,${E},${Ep},${theta},\"${tgt}_kin${kin}\",0)"
+	cd $home
+fi
+
+if [ "$tgt" == "D2" ]
+then
+        echo "D2"
+        tarid=1
+elif [ "$tgt" == "H3" ]
+then
+        echo "H3"
+        tarid=2
+
+elif [ "$tgt" == "He3" ]
+then
+        echo "He3"
+        tarid=3
+else
+        echo "neither"
+        tarid=0
+fi
+
+suffix[1]=""
+suffix[2]=""
+suffix[3]=""
+suffix[4]="_Alwalls_Up"
+suffix[5]="_Alwalls_Dn"
+
+cd "INP"
+i=1
+target=$tgt
+for x in $tarid 4 5
+do
+	target="${tgt}${suffix[${x}]}"
+	sh gen_inp $kin $target
+done
+cd $home
+echo "Starting the table generation"
+echo "This will take a while"
+sh gen_target_complete  marathon_kin${kin}_${tgt} $runnum ${tgt} ${tarid}
+
+

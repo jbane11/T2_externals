@@ -14,9 +14,9 @@ externals_all_srcs = externals_all.f sigmodel_calc_simple.f fy.f target_info.f \
 
 ########################################
 
-none: externals_all
+none: externals_all rc_convert
 
-all:  externals_all
+all:  externals_all rc_convert
 
 ##externals_all:
 ##	$(F77) $(FFLAGS) -o jtest $(externals_all_srcs) $(OTHERLIBS)
@@ -65,9 +65,9 @@ get_cc_info.o: get_cc_info.f
 #r1998.o: r1998.f
 #	$(F77) $(FFLAGS) -c $< -o $@
 
-externals_all: $(externals_all_objs) Makefile
+externals_all:  Makefile $(externals_all_objs) 
 	$(F77) -o $@  $(FFLAGS) $(externals_all_objs) $(OTHERLIBS)
 
 
 clean:
-	rm -f *.o externals_all
+	rm -f *.o externals_all rc_convert

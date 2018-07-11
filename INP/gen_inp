@@ -2,7 +2,7 @@
 
 if [ $# -lt 2 ]
 then
-	echo "Please enter kin and tgt "
+	echo "Please enter kin, tgt, and run number "
 	read kin
 	read tgt
 else
@@ -17,7 +17,7 @@ rm -f -v ${file}
 
 
 echo "input files for EXTERNAL: runplan/target/output">${file}
-echo "RUNPLAN/marathon_kin${kin}.inp">>${file}
+echo "RUNPLAN/marathon_${tgt}_kin${kin}.inp">>${file}
 echo "TARG/targ.${tgt}">>${file}
-echo "OUT/marathon_kin${kin}_${tgt}_details.out">>${file}
+echo "OUT/mara_kin${kin}_${tgt}_details.out">>${file}
 

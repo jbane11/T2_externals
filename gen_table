@@ -1,0 +1,33 @@
+#!bin/bash
+
+if [ $# -lt 4 ]
+then
+	echo "Please enter the INP file for the simulation"
+	read INP
+	echo "Please enter the run number this for"
+	read runnum
+	echo "Please enter tgt name: He3,H3,D2..."
+	read tgt
+	echo "Please enter tgt id: D2=1, H3=2, He3 =3, entrance wall=4, exit wall =5, single foil =6"
+	read ID
+else
+	INP=$1
+	runnum=$2
+	tgt=$3
+	ID=$4
+fi
+
+
+./externals_all << endofinput > runout/${INP}.out
+${INP}
+endofinput
+
+rm -v OUT/table_${INP}.out
+./rc_convert ${INP}.out
+
+mv OUT/table_${INP}.out OUT/${tgt}_${runnum}_${ID}.out
+
+
+
+
+

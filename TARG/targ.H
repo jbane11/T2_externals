@@ -1,27 +1,27 @@
-Carbon 1.6%     
-from ent.m2 using 0.452 g/cm2- revised 2/20/01, and Dunne 8/01
+Hall A 2018: 25 cm H target 
+Nominal values - not exact
 ----*----1----*----2----*----3----*----4----*----5----*----6----*----7---
                                                                          
-iZ    (#)         79                                                     
-iA    (#)        197                                                     
+iZ    (#)          1                                                     
+iA    (#)          1                                                     
                                                                          
 avgA  (#)                                                                
 avgM (GeV)                                                               
                                                                          
-target type          ordinary   : columns 21-27         
-thicknesses (rad. lengths):                                              
-   target          0.05874             
-   walls           0.000001                                              
-   pre-target      0.000001                 
-   post-target     0.00761                  
-nseg (even)        2   
+target type         TRITIUM     : columns 21-27                                         
+thicknesses (rad. lengths):
+   target          0.00124   
+   walls           0.00481                                               
+   pre-target      0.00342   
+   post-target     0.00732
+nseg (even)        4                                                     
                                                                          
 Pking: Ep/E >      1.0                                                   
 ikk               14  elastic nucleon model                              
 iout               2                                                     
 idut              13 elastic d2 model: 0=old, 11,12,13,14=Ulmar(below    
-inel_model       206  inelastc h2 modl: 0=ineft(Bodek);9,12=Stuart+F2Glob etc.
-pauli_model        1  0= old stein model; 1=tsai model; 2 no suppression
+inel_model       206  inelastc d2 model: 0=ineft(Bodek);9,12=Stuart+F2Glob etc.
+pauli_model        4  0= stein; 1=tsai; 2 none; 3=vanorden; 4=lapikas
 Nuc Tail Method    1  0=No cos(theta_k) integration;  1= cos(th_k) integration
 Nuc FormFac Mdl    1  0=Shell,Gauss, 1=Hicks for Si28 and O16
 
@@ -36,7 +36,7 @@ Nuc FormFac Mdl    1  0=Shell,Gauss, 1=Hicks for Si28 and O16
 !            9 f2glob model 9
 !           12 f2glob model 12
 ! RES_MODEL  1 ineft
-!            2 H2Model           
+!            2 H2Model/D2model           
 ------------------------------------------------------------------------ 
                                                                          
 FIRST TWO LINES ARE FOR USER COMMENTS.                                   

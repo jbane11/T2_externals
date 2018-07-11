@@ -1,0 +1,6 @@
+INP=$1
+
+rm -v OUT/table_${INP}.out
+./rc_convert ${INP}.out
+
+mv OUT/table_${INP}.out OUT/He3_1257_3.out
