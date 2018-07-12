@@ -1,5 +1,5 @@
 #!bin/bash
-
+#set -x
 
 
 if [ $# -lt 4 ]
@@ -24,16 +24,17 @@ then
 	exit
 fi
 
-
-suffx[4]=Alwalls_Up
-suffx[5]=Alwalls_Dn 
+suffx[1]=""
+suffx[2]=""
+suffx[3]=""
+suffx[4]=_Alwalls_Up
+suffx[5]=_Alwalls_Dn 
 i=1
 INP1=$INP
 for x in $ID 4 5
 	do
+	INP1="${INP}${suffx[${x}]}"
 	sh gen_table ${INP1} ${runnum} ${tgt} ${x}
-	INP1="${INP}_${suffx[${x}]}"
 
-	i=2
 
 done

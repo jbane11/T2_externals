@@ -17,7 +17,7 @@ rm -f -v ${file}
 
 
 echo "input files for EXTERNAL: runplan/target/output">${file}
-echo "RUNPLAN/marathon_${tgt}_kin${kin}.inp">>${file}
+echo "RUNPLAN/marathon_kin${kin}.inp">>${file}
 echo "TARG/targ.${tgt}">>${file}
 echo "OUT/mara_kin${kin}_${tgt}_details.out">>${file}
 

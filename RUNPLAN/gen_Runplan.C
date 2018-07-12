@@ -20,7 +20,7 @@ void gen_Runplan(int set_all =1, double E_c=10.589,double Ep_c=3.1,
 		cin >> theta_c;
 		cout<<endl;
 
-		cout <<"Please enter the kin name (Example: He3_kin5)"<<endl;
+		cout <<"Please enter the kin name (Example: kin5)"<<endl;
 		cin >>kin;
 	}
 	//Step size!!!
