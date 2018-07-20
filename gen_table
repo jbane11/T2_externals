@@ -4,7 +4,7 @@ if [ $# -lt 4 ]
 then
 	echo "Please enter the INP file for the simulation"
 	read INP
-	echo "Please enter the run number this for"
+	echo "Please enter the kin # for this table"
 	read runnum
 	echo "Please enter tgt name: He3,H3,D2..."
 	read tgt
@@ -12,7 +12,7 @@ then
 	read ID
 else
 	INP=$1
-	runnum=$2
+	kin=$2
 	tgt=$3
 	ID=$4
 fi
@@ -37,7 +37,7 @@ then
 fi
 ./rc_convert ${INP}.out
 
-mv OUT/table_${INP}.out OUT/${tgt}_${runnum}_${ID}.out
+mv OUT/table_${INP}.out OUT/kin${kin}_${tgt}_${ID}.out
 
 
 

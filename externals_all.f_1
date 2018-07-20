@@ -53,8 +53,6 @@ C=======================================================================
       real sbqesv(100000),sfactsv(100000),srsv(100000)
       real srqesv(100000)
       real srinsv(100000),srelsv(100000)
-      real srsv_int(100000),srelsv_int(100000),srinsv_int(100000)
-      real q2out(100000)
       INTEGER I,II,ISEG_NUM,j,npts,XFLAG
       REAL           CONTINUUM,QETAIL,QEPEAK,EPEAK,ATAILFL1,ATAILFL_QE
       EXTERNAL       CONTINUUM,QETAIL,QEPEAK,EPEAK,ATAILFL1,ATAILFL_QE
@@ -68,7 +66,7 @@ C=======================================================================
       real*4 DUM1,DUM2
       real deltae_cc, f1cc ! boost and focus factor for coulomb correction.
       real sigborn_cc,sigborninel_cc,sigbornqe_cc
-      real beame_cc,eprime_cc,ccor(100000)
+      real beame_cc,eprime_cc,ccor
 
       COMMON/ioana/xval
 
@@ -130,11 +128,11 @@ C Unless specified, set default number of target segments for integrals:
 c                                                                        
       IF (NSEG.LE.0) NSEG = 4                                           
                                                                         
-c      WRITE(10,'(                                                       
-c     >''    E1    TH    Q2 COS_K         SMR     NUC  '',     
-c     >''        INT-SMR'',/,                                               
-c     >''    EP     X    W2 QE-PK  INELA  Q-ELA  ELAST'',     
-c     >''   TOTAL  MODEL'',/)')                                              
+      WRITE(10,'(                                                       
+     >''    E1    TH    Q2 COS_K         SMR     NUC  '',     
+     >''        INT-SMR'',/,                                               
+     >''    EP     X    W2 QE-PK  INELA  Q-ELA  ELAST'',     
+     >''   TOTAL  MODEL'',/)')                                              
 
 c check out pauli supp.
       do ii=1,5
@@ -189,7 +187,6 @@ c           endif
          thsv(npts)=thset
          xsv(npts)=x
          w2sv(npts)=w2
-         q2out(npts) = q2set
 c         call ineft(q28,w8,w18,w28,2.D0)
 c           WRITE( *,'(1X,2F7.3,3F7.3)') E0SET,EPSET,TH,w18,w28                   
 
@@ -212,8 +209,8 @@ c     CALL  FYXSEC8(E0SET,EPSET,TH,SIGMA_CORR)
      >        iA,avgM,DUM1,DUM2,SIGMA_CORR,XFLAG,FACT)
          qefact = fact
 
-c         write(*,'(1x,''e,ep,th,sigb,sigqe='',3f8.2,2e12.4)')
-c     >        E0SET,EPSET,TH,SIGMA_BORN,sigma_corr
+         write(*,'(1x,''e,ep,th,sigb,sigqe='',3f8.2,2e12.4)')
+     >        E0SET,EPSET,TH,SIGMA_BORN,sigma_corr
 
          SIGMA_BORNPLSQE = SIGMA_BORN+SIGMA_CORR
 
@@ -340,27 +337,27 @@ c     dorad           SIGMA_BORNPLSQE = SIGMA_BORN+SIGMA_CORR
             VTRUN = VTSTOP-VTSTART                                       
             TTRUN = TTSTOP-TTSTART                                       
             
-c            if(doeg1b) then
-c               write(10,'(1x,2i4,3f7.3,2e12.4)') ipsv,ithsv,
-c     >              e0set,epset,thset,SIGMA_BORNPLSQE,
-c     >              sigma_INEL(2)+sigma_QELA(2)+sigma_ELPK(2)
-c            else
-c               WRITE(10,'(1X,2f7.3,f6.2,5F8.2,F7.3/
-c     >              1x,2f7.3,F6.2,5f8.2,1PE10.3,/)')
-c     >                E0SET, TH, Q2SET, DELTA_QE_PK_COS(1),  
-c     >                DELTA_INEL(1),DELTA_QELA(1), DELTA_ELPK(1), 
-c     >                TOTAL(1), RAT_SMR,EPSET, x, W2, 
-c     >                DELTA_QE_PK_COS(2), DELTA_INEL(2),DELTA_QELA(2), 
-c     >                DELTA_ELPK(2), TOTAL(2), SIGMA_BORNPLSQE  
-c              endif
-c              WRITE(*,'(1X,2f7.3,f6.2,6F8.2,F7.3/1x,2f7.3,F6.2,6f8.2,    
-c     >             1PE10.3,/)') 
-c     >             E0SET,TH,Q2SET,DELTA_QE_PK_COS(1),DELTA_QEPK(1),
-c     >             DELTA_INEL(1),DELTA_QELA(1), DELTA_ELPK(1), TOTAL(1), 
-c     >             RAT_SMR, EPSET,  x, W2,DELTA_QE_PK_COS(2),
-c     >             DELTA_QEPK(2),DELTA_INEL(2),
-c     >             DELTA_QELA(2), DELTA_ELPK(2), TOTAL(2), 
-c     >             SIGMA_BORNPLSQE  
+            if(doeg1b) then
+               write(10,'(1x,2i4,3f7.3,2e12.4)') ipsv,ithsv,
+     >              e0set,epset,thset,SIGMA_BORNPLSQE,
+     >              sigma_INEL(2)+sigma_QELA(2)+sigma_ELPK(2)
+            else
+               WRITE(10,'(1X,2f7.3,f6.2,5F8.2,F7.3/
+     >              1x,2f7.3,F6.2,5f8.2,1PE10.3,/)')
+     >                E0SET, TH, Q2SET, DELTA_QE_PK_COS(1),  
+     >                DELTA_INEL(1),DELTA_QELA(1), DELTA_ELPK(1), 
+     >                TOTAL(1), RAT_SMR,EPSET, x, W2, 
+     >                DELTA_QE_PK_COS(2), DELTA_INEL(2),DELTA_QELA(2), 
+     >                DELTA_ELPK(2), TOTAL(2), SIGMA_BORNPLSQE  
+              endif
+              WRITE(*,'(1X,2f7.3,f6.2,6F8.2,F7.3/1x,2f7.3,F6.2,6f8.2,    
+     >             1PE10.3,/)') 
+     >             E0SET,TH,Q2SET,DELTA_QE_PK_COS(1),DELTA_QEPK(1),
+     >             DELTA_INEL(1),DELTA_QELA(1), DELTA_ELPK(1), TOTAL(1), 
+     >             RAT_SMR, EPSET,  x, W2,DELTA_QE_PK_COS(2),
+     >             DELTA_QEPK(2),DELTA_INEL(2),
+     >             DELTA_QELA(2), DELTA_ELPK(2), TOTAL(2), 
+     >             SIGMA_BORNPLSQE  
            endif                !test on do rad
            sbsv(npts)= SIGMA_BORNPLSQE
            sbisv(npts) = SIGMA_BORN
@@ -377,9 +374,6 @@ c           sfactsv(npts) = qefact
               srelsv(npts) = sigma_elpk(1)
               srinsv(npts) = sigma_inel(1)
            endif
-           srsv_int(npts) = SIGMA_BORNPLSQE*(1+total(1)/100.)
-           srelsv_int(npts) = sigma_elpk(1)
-           srinsv_int(npts) = sigma_inel(1)
 c --- aji ----------------------------------------------
 c now do Coulomb correction
 
@@ -404,20 +398,20 @@ cc also, all deltae_cc's are computed for Z-1, not Z!/-*
               CALL SIGMODEL_CALC(beame_cc,eprime_cc,TH,iZ,
      >             iA,avgM,DUM1,DUM2,sigborn_cc,XFLAG,FACT)           
               f1cc = beame_cc/e0sv(npts)
-              ccor(npts)=0.
+              ccor=0.
               if(sigborn_cc.gt.0.0) then ! avoid nan
-                 ccor(npts) = sbsv(npts)/sigborn_cc/f1cc/f1cc
+                 ccor = sbsv(npts)/sigborn_cc/f1cc/f1cc
               else
-                 ccor(npts)=1.0
+                 ccor=1.0
               endif
            endif   !doccor 
 
 c------------------------------------------------------------------
 c aji the born model with ccor, since we  radiated the model with  Coulombic
 c effect for this version
-           sbsv(npts)= sbsv(npts)/ccor(npts)
-           sbisv(npts)= sbisv(npts)/ccor(npts)
-           sbqesv(npts)= sbqesv(npts)/ccor(npts)
+           sbsv(npts)= sbsv(npts)/ccor
+           sbisv(npts)= sbisv(npts)/ccor
+           sbqesv(npts)= sbqesv(npts)/ccor
 
            if(sbsv(npts).lt.0.0) then
               write(6,*) 'Danger Will Robinson !!'
@@ -427,41 +421,27 @@ c effect for this version
 
         
             
-c           write(17,'(1x,5f9.4,9e13.5)') e0sv(npts),epsv(npts),
-c     >          thsv(npts),xsv(npts),q2set,sbsv(npts),sbisv(npts),
-c     >          sbqesv(npts),srsv(npts),
-c     >          srelsv(npts),srqesv(npts),srinsv(npts),ccor
+           write(17,'(1x,5f9.4,9e13.5)') e0sv(npts),epsv(npts),
+     >          thsv(npts),xsv(npts),q2set,sbsv(npts),sbisv(npts),
+     >          sbqesv(npts),srsv(npts),
+     >          srelsv(npts),srqesv(npts),srinsv(npts),ccor
 
-c           write(6,'(1x,5f9.4,9e13.5)') e0sv(npts),epsv(npts),
-c     >          thsv(npts),xsv(npts),q2set,sbsv(npts),
-c     >          sbisv(npts),sbqesv(npts),srsv(npts),
-c     >          srelsv(npts),srqesv(npts),srinsv(npts),ccor
+           write(6,'(1x,5f9.4,9e13.5)') e0sv(npts),epsv(npts),
+     >          thsv(npts),xsv(npts),q2set,sbsv(npts),
+     >          sbisv(npts),sbqesv(npts),srsv(npts),
+     >          srelsv(npts),srqesv(npts),srinsv(npts),ccor
 
 cc     write(18,'(1x,4f10.3)') e0sv(npts),epsv(npts),thsv(npts),
 cc     >  1./(1+total(2)/100.)
 
-c           write(18,'(1x,3f9.4,7e13.5)') 
-c     >          e0sv(npts),epsv(npts),thsv(npts),
-c     >          sbsv(npts),SIGMA_BORNPLSQE*(1+total(1)/100.),
-c     >          sigma_elpk(1),sigma_inel(1),srsv(npts),
-c     >          srelsv(npts),srinsv(npts)
+           write(18,'(1x,3f9.4,7e13.5)') 
+     >          e0sv(npts),epsv(npts),thsv(npts),
+     >          sbsv(npts),SIGMA_BORNPLSQE*(1+total(1)/100.),
+     >          sigma_elpk(1),sigma_inel(1),srsv(npts),
+     >          srelsv(npts),srinsv(npts)
 
  99     CONTINUE                                                          
- 100    CONTINUE    
-
-        do i=1,npts ! write the output
-           write(17,'(1x,5f9.4,9e13.5)') e0sv(i),epsv(i),
-     >          thsv(i),xsv(i),q2out(i),sbsv(i),sbisv(i),
-     >          sbqesv(i),srsv(i),
-     >          srelsv(i),srqesv(i),srinsv(i),ccor(i)
-
-
-           write(18,'(1x,3f9.4,7e13.5)') 
-     >          e0sv(i),epsv(i),thsv(i),
-     >          sbsv(i),srsv_int(i),
-     >          srelsv_int(i),srinsv_int(i),srsv(i),
-     >          srelsv(i),srinsv(i)
-        enddo
+ 100    CONTINUE                                                          
 cdg      write(16,1616)
  1616   format(1x,'title bottom ',1h','W**2 (GeV)**2',1h'/
      >  1x,'title left ',1h','dsigma (nb/sr/gev)',1h')
