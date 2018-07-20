@@ -24,8 +24,8 @@ void gen_Runplan(int set_all =1, double E_c=10.589,double Ep_c=3.1,
 		cin >>kin;
 	}
 	//Step size!!!
-	double theta_step	=0.01;
-	double Ep_step		=0.001;
+	double theta_step	=0.1;
+	double Ep_step		=0.01;
 	double E_step		=0.001;
 	//Limits for kins: acceptance of HRS (+- 
 	double th_min = theta_c - 1.6; //degrees
