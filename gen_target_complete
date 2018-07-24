@@ -1,5 +1,5 @@
 #!bin/bash
-set -x
+#set -x
 
 
 if [ $# -lt 4 ]
@@ -10,7 +10,7 @@ then
         read kin 
         echo "Please enter tgt name: He3,H3,D2..."
         read tgt
-        echo "Please enter tgt id: D2=1, H3=2, He3 =3 single foil =6"
+        echo "Please enter tgt id: D2=2, H3=3, He3 =4 single foil =7"
         read ID
 else
         INP=$1
@@ -19,7 +19,7 @@ else
         ID=$4
 fi
 
-if [ ID == 6 ]
+if [ ID == 7 ] #Still need to work on foil
 then
 	exit
 fi
@@ -27,11 +27,12 @@ fi
 suffx[1]=""
 suffx[2]=""
 suffx[3]=""
-suffx[4]=_Alwalls_Up
-suffx[5]=_Alwalls_Dn 
+suffx[4444]=""
+suffx[5]=_Alwalls_Up
+suffx[6]=_Alwalls_Dn 
 i=1
 INP1=$INP
-for x in $ID 4 5
+for x in $ID 5 6 
 	do
 	INP1="${INP}${suffx[${x}]}"
 	sh gen_table ${INP1} ${kin} ${tgt} ${x}
