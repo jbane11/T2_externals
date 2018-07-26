@@ -1,5 +1,5 @@
 #!bin/bash
-set -x
+#set -x
 
 #########
 #This code will check if you have an IMP and Runplan for your current settings. 

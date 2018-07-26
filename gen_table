@@ -17,15 +17,15 @@ else
 	ID=$4
 fi
 
-if [ -e OUT/${INP}.out ]
-then
+#if [ -e OUT/${INP}.out ]
+#then
 #	echo "Table already exist would you like to gen again, (y/n)"
 #	read check
-	if [ "${check}" != "y" ]
-	then
-		exit
-	fi
-fi
+#	if [ "${check}" != "y" ]
+#	then
+#		exit
+#	fi
+#fi
 now=$(date +"%T")
 echo "Current time : $now"
 
