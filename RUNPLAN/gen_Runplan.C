@@ -1,5 +1,3 @@
-#include "/home/jbane/headers/inc1.h"
-
 
 void gen_Runplan(int set_all =1, double E_c=10.589,double Ep_c=3.1, 
 		 double theta_c = 12.5890, string kin="", int debug=1)
