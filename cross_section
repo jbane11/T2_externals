@@ -1,5 +1,5 @@
 #!bin/bash
-#set -x
+set -x
 
 #########
 #This code will check if you have an IMP and Runplan for your current settings. 
@@ -11,7 +11,7 @@ if [ $# -lt 2 ]
 then
 	echo "Please enter the target you would like to use...(He3, H3, D2)"
 	read tgt
-	echo "Please enter the angle you want to look at, or k for kin. number"
+	echo "Please enter the ANGLE you want to look at, or k for kin. number"
 	read angle
 	if [ "${angle}" == "k" ]
 	then
@@ -78,6 +78,10 @@ elif [ "$tgt" == "He3" ]
 then
         echo "He3"
         tarid=4
+elif [ "$tgt" == "C12" ]
+then
+        echo "C12"
+        tarid=7
 else
         echo "dummy"
         tarid=0
@@ -91,18 +95,28 @@ suffix[3]=""
 suffix[4]=""
 suffix[5]="_Alwalls_Up"
 suffix[6]="_Alwalls_Dn"
+suffix[7]=""
 
-cd "INP"
-i=1
 target=$tgt
-for x in $tarid 5 6
-do
-	target="${tgt}${suffix[${x}]}"
+
+if [[ ${tarid} -lt 5 ]]
+then
+	cd "INP"
+	i=1
+	for x in $tarid 5 6
+	do
+		target="${tgt}${suffix[${x}]}"
+		sh gen_inp $kin $target
+	done
+	cd $home
+	echo "Starting the table generation"
+	echo "This will take a while"
+	sh gen_target_complete  marathon_kin${kin}_${tgt}  ${kin}  ${tgt}  ${tarid}
+else
+	cd "INP"
 	sh gen_inp $kin $target
-done
-cd $home
-echo "Starting the table generation"
-echo "This will take a while"
-sh gen_target_complete  marathon_kin${kin}_${tgt}  ${kin}  ${tgt}  ${tarid}
-
-
+	cd $home
+	echo "Starting the table generation"
+	echo "This will take a while"
+	sh gen_table  marathon_kin${kin}_${target}  ${kin}  ${tgt}  ${tarid}
+fi

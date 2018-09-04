@@ -28,12 +28,13 @@ c      charter(len=ll) id2
       
       read(21,'(A)') header
       dowhile(.not.thend)
+        
         read(21,*) e,ep,theta,xbnuc,q2,sigborn,siginel,sigqe,
      &            sigrad,sigelas,t1,t2,t3
         corfac = sigborn/sigrad
          
 c     if(abs(e-1.2).LT.0.1) then  
-        write(22,2100)  aa,zz,e,ep,theta,sigborn,corfac 
+        write(22,2100)  e,ep,theta,sigborn,corfac 
 c      elseif(abs(e-2.3).LT.0.1) then 
 c        write(23,2100) e,ep,theta,sigborn,corfac 
 c      elseif(abs(e-3.5).LT.0.1) then 
@@ -42,7 +43,7 @@ c      elseif(abs(e-4.6).LT.0.1) then
 c        write(25,2100) e,ep,theta,sigborn,corfac 
 c      endif
 
-      enddo
+ 200  enddo 
 
       close(21)
       close(22)
@@ -51,6 +52,6 @@ c      close(24)
 c      close(25)
 
  2000 thend = .true.
- 2100 format(i2,i2,3f8.3,2x,F13.4,2x,F10.5)
+ 2100 format(3f8.3,2x,F13.4,2x,F10.5)
 
       end

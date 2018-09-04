@@ -61,16 +61,17 @@ fi
 suffix[1]=""
 suffix[2]=""
 suffix[3]=""
-suffix[4]="_Alwalls_Up"
-suffix[5]="_Alwalls_Dn"
+suffix[5]="_Alwalls_Up"
+suffix[6]="_Alwalls_Dn"
+suddix[7]=""
 
 cd "INP"
 
 target="${tgt}${suffix[${tgtid}]}"
 sh gen_inp ${kin} ${target}
 cd $home
-echo "Starting the table generation"
-echo "This will take a while"
-sh gen_table  marathon_kin${kin}_${target}  ${kin}  ${tgt}  ${tarid}
 
+	echo "Starting the table generation"
+	echo "This will take a while"
+	sh gen_table  marathon_kin${kin}_${target}  ${kin}  ${tgt}  ${tarid}
 

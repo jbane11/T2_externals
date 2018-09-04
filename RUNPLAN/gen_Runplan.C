@@ -26,10 +26,10 @@ void gen_Runplan(int set_all =1, double E_c=10.589,double Ep_c=3.1,
 	double Ep_step		=0.01;
 	double E_step		=0.001;
 	//Limits for kins: acceptance of HRS (+- 
-	double th_min = theta_c - 1.6; //degrees
-	double th_max = theta_c + 1.6; //degrees
-	double Ep_min = (0.95)*Ep_c;
-	double Ep_max = (1.05)*Ep_c;
+	double th_min = theta_c - 1.9; //degrees
+	double th_max = theta_c + 1.9; //degrees
+	double Ep_min = (0.92)*Ep_c;
+	double Ep_max = (1.08)*Ep_c;
 	double E_max = E_c; //Just one value for E as of now.
 	double E_min = E_c;
 	
