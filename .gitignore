@@ -1,3 +1,7 @@
 OUT/*.out
 runout/*.*
-*.swp
+RUNPLAN/*.inp
+*/*.swp
+*/*.inp
+*.o
+
